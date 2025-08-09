@@ -1,0 +1,81 @@
+name: hypermart
+description: A Flutter shopping app based on Figma design
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.17.0 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # The "flutter_lints" package below contains a set of recommended lints to
+  # encourage good coding practices. The lint set provided by the package is
+  # activated in the `analysis_options.yaml` file located at the root of your
+  # package. See that file for information about deactivating specific lint
+  # rules and activating additional ones.
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/vegetables_offer.jpg
+    - assets/images/groceries.jpg
+    - assets/images/electronics.jpg
+    - assets/images/fashion.jpg
+    - assets/images/mobiles.jpg
+    - assets/images/strawberries.jpg
+    - assets/images/chips.jpg
+    - assets/images/chair.jpg
+    - assets/images/washing_machine.jpg
+    - assets/images/headphones.jpg
+    - assets/images/smartwatch.jpg
+    - assets/images/running_shoes.jpg
+    - assets/images/coffee_maker.jpg
+    - assets/images/bluetooth_speaker.jpg
+    - assets/images/desk_lamp.jpg
+    - assets/images/hollister.png
+    - assets/images/lakme.png
+    - assets/images/maybelline.png
+    - assets/images/nike.png
+    - assets/images/adidas.png
+    - assets/images/prada.png
+    - assets/images/revlon.png
+    - assets/images/sugar.png
+    - assets/images/garnier.png
+    - assets/images/clinique.png
+    - assets/images/chanel.png
+    - assets/images/zara.png
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: fonts/Poppins-Regular.ttf
+          weight: 400
+        - asset: fonts/Poppins-Medium.ttf
+          weight: 500
+        - asset: fonts/Poppins-SemiBold.ttf
+          weight: 600
+        - asset: fonts/Poppins-Bold.ttf
+          weight: 700
+
+    - family: DM Sans
+      fonts:
+        - asset: fonts/DMSans-Regular.ttf
+          weight: 400
+        - asset: fonts/DMSans-Medium.ttf
+          weight: 500
+        - asset: fonts/DMSans-Bold.ttf
+          weight: 700
