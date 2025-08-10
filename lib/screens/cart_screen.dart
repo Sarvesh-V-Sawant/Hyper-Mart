@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart'; // Add this import
 
 class CartScreen extends StatefulWidget {
+  final VoidCallback onNavigateToHome;
+
+  const CartScreen({
+    Key? key,
+    required this.onNavigateToHome,
+  }) : super(key: key);
+
   @override
   _CartScreenState createState() => _CartScreenState();
 }
@@ -165,12 +171,7 @@ class _CartScreenState extends State<CartScreen> {
                 ),
                 SizedBox(height: 32),
                 ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                    );
-                  },
+                  onPressed: widget.onNavigateToHome,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF4AB786),
                     padding: EdgeInsets.symmetric(horizontal: 32, vertical: 16),
@@ -354,36 +355,56 @@ class _CartScreenState extends State<CartScreen> {
             height: 80,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              image: DecorationImage(
-                image: AssetImage(item.imagePath),
-                fit: BoxFit.cover,
-              ),
+              color: Colors.grey[200],
             ),
-            child: item.offer.isNotEmpty
-                ? Positioned.fill(
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFEA7173),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(8),
-                      bottomRight: Radius.circular(8),
-                    ),
-                  ),
-                  child: Text(
-                    item.offer,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 8,
-                      fontWeight: FontWeight.w500,
-                    ),
+            child: Stack(
+              children: [
+                // Actual image with fallback
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.asset(
+                    item.imagePath,
+                    width: double.infinity,
+                    height: double.infinity,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[300],
+                        child: Icon(
+                          Icons.image,
+                          color: Colors.grey[500],
+                          size: 30,
+                        ),
+                      );
+                    },
                   ),
                 ),
-              ),
-            )
-                : null,
+                // Offer badge
+                if (item.offer.isNotEmpty)
+                  Positioned(
+                    top: 0,
+                    left: 0,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: Color(0xFFEA7173),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          bottomRight: Radius.circular(8),
+                        ),
+                      ),
+                      child: Text(
+                        item.offer,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 8,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
           ),
 
           SizedBox(width: 12),
@@ -522,7 +543,7 @@ class _CartScreenState extends State<CartScreen> {
               ),
               SizedBox(height: 8),
               Text(
-                '₹${item.price * item.quantity}',
+                '₹${(item.price * item.quantity).toInt()}',
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.bold,

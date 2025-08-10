@@ -50,10 +50,18 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
 
-  final List<Widget> _screens = [
+  // Method to change tab from other screens
+  void changeTab(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  // Create screens with navigation callback
+  List<Widget> get _screens => [
     HomeScreen(),
-    CategoriesScreen(), // Categories screen
-    CartScreen(), // This will be the cart screen
+    CategoriesScreen(),
+    CartScreen(onNavigateToHome: () => changeTab(0)),
     WishlistScreen(),
     ProfileScreen(),
   ];
@@ -61,7 +69,10 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _screens[_currentIndex],
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _screens,
+      ),
       bottomNavigationBar: Container(
         height: 80,
         decoration: BoxDecoration(
